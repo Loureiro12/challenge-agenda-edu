@@ -15,6 +15,12 @@ export const Content = styled.div`
   padding: 30px;
   border-radius: 8px;
   background-color: #c1a0f9;
+
+  @media (max-width: 600px) {
+    display: block;
+    justify-content: center;
+    text-align: center;
+  }
 `
 
 export const MovieImage = styled.img`
@@ -32,6 +38,7 @@ export const Title = styled.h1`
   font-size: 1.25rem;
   font-weight: 600;
   color: ${(props) => props.theme.black};
+  margin-bottom: 0.625rem;
 `
 
 export const Synopsis = styled.p`
@@ -39,6 +46,7 @@ export const Synopsis = styled.p`
   font-weight: 400;
   color: ${(props) => props.theme.black};
   text-align: justify;
+  margin-bottom: 0.625rem;
 `
 
 export const ExtraInformation = styled.div``
@@ -67,6 +75,7 @@ export const ContentEvaluation = styled.p`
   font-size: 0.75rem;
   font-weight: 400;
   color: ${(props) => props.theme.black};
+  margin-bottom: 0.625rem;
 `
 
 export const ContentEvaluationTitle = styled.p`

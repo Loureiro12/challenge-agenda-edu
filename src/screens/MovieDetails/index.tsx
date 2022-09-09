@@ -1,4 +1,8 @@
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+
 import { Header } from '../../components/Header'
+import useMovie from '../../hooks/useMovie'
 
 import {
   Container,
@@ -16,30 +20,34 @@ import {
 } from './styles'
 
 export function MovieDetails() {
+  const { fetchSpecificMovie, specificMovie } = useMovie()
+  const { idMovie } = useParams()
+
+  useEffect(() => {
+    return fetchSpecificMovie(idMovie ?? '')
+  }, [])
   return (
     <>
       <Header />
       <Container>
         <Content>
           <MovieImage
-            src='https://www.themoviedb.org/t/p/w220_and_h330_face/c8z3JtI7hYAir7dxg0wpEv4s9nL.jpg'
+            src={`${process.env.REACT_APP_BASE_URL_IMAGEM}/${specificMovie.poster_path}`}
             alt=''
           />
 
           <MovieInfo>
-            <Title>Os Primeiros Passos de Groot</Title>
-            <Synopsis>
-              Baby Groot finalmente está pronto para tentar dar seus primeiros passos fora de seu
-              vaso, aprendendo que se deve andar antes de correr.
-            </Synopsis>
+            <Title>{specificMovie.title}</Title>
+            <Synopsis>{specificMovie.overview}</Synopsis>
 
             <ExtraInformation>
               <ContentEvaluationTitle>Nota do filme</ContentEvaluationTitle>
-              <ContentEvaluation>56</ContentEvaluation>
-              <TitleMainCast>Elenco principal</TitleMainCast>
+              <ContentEvaluation>{specificMovie.vote_average}</ContentEvaluation>
+              <TitleMainCast>Gêneros</TitleMainCast>
               <ContainerMainCast>
-                <MainCastText>Vin Diesel</MainCastText>
-                <MainCastText>Fred Tatasciore</MainCastText>
+                {specificMovie?.genres?.map((e) => {
+                  return <MainCastText key={e.id}>{e.name}</MainCastText>
+                })}
               </ContainerMainCast>
             </ExtraInformation>
           </MovieInfo>
