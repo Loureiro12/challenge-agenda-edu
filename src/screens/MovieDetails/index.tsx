@@ -33,7 +33,7 @@ export function MovieDetails() {
         <Content>
           <MovieImage
             src={`${process.env.REACT_APP_BASE_URL_IMAGEM}/${specificMovie.poster_path}`}
-            alt=''
+            alt={`Imagem do filme ${specificMovie.title}`}
           />
 
           <MovieInfo>
